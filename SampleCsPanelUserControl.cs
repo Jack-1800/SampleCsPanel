@@ -9,42 +9,44 @@ using System.Windows.Forms;
 
 namespace SampleCsPanel
 {
-  // TODO: Create your own Guid for this class
+  /// <summary>
+  /// This is the user control that is buried in the tabbed, docking panel.
+  /// </summary>
   [System.Runtime.InteropServices.Guid("83D6FCC8-4F31-4AE3-BF60-C6528DB232D0")]
   public partial class SampleCsPanelUserControl : UserControl
   {
+    /// <summary>
+    /// Public constructor
+    /// </summary>
     public SampleCsPanelUserControl()
     {
       InitializeComponent();
+
+      // Set the user control property on our plug-in
+      SampleCsPanelPlugIn.Instance.UserControl = this;
+
+      // Create a dispose event handler
+      this.Disposed += new EventHandler(SampleCsPanelUserControl_Disposed);
     }
 
+    /// <summary>
+    /// Occurs when the component is disposed by a call to the
+    /// System.ComponentModel.Component.Dispose() method.
+    /// </summary>
+    void SampleCsPanelUserControl_Disposed(object sender, EventArgs e)
+    {
+      // Clear the user control property on our plug-in
+      SampleCsPanelPlugIn.Instance.UserControl = null;
+    }
+
+    /// <summary>
+    /// Returns the ID of this panel.
+    /// </summary>
     public static System.Guid PanelId
     {
       get
       {
         return typeof(SampleCsPanelUserControl).GUID;
-      }
-    }
-
-    /// <summary>
-    /// http://msdn.microsoft.com/en-us/library/system.windows.forms.control.previewkeydown(v=vs.100).aspx
-    /// Some key presses, such as the TAB, RETURN, ESC, and arrow keys, are typically ignored by some controls
-    /// because they are not considered input key presses. By handling the PreviewKeyDown event and setting the
-    /// IsInputKey property to true, you can raise the KeyDown event. Unfortunately, this does does not work
-    /// for user controls buried in a tabbed, docking panel.
-    /// </summary>
-    private void textBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-    {
-      switch (e.KeyCode)
-      {
-        case Keys.Tab:
-        case Keys.Return:
-        case Keys.Down:
-        case Keys.Up:
-        case Keys.Left:
-        case Keys.Right:
-          e.IsInputKey = true;
-          break;
       }
     }
   }

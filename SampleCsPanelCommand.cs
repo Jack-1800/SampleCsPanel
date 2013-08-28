@@ -1,5 +1,8 @@
 ﻿namespace SampleCsPanel
 {
+  /// Every RhinoCommon plug-in can have one or more Rhino.Commands.Command
+  /// inherited classes. DO NOT create instances of this class yourself. It is the
+  /// responsibility of Rhino to create an instance of this class.
   [System.Runtime.InteropServices.Guid("3d3db472-509d-41c5-97e3-2890c5fb9827")]
   public class SampleCsPanelCommand : Rhino.Commands.Command
   {
@@ -10,14 +13,18 @@
       Instance = this;
     }
 
-    ///<summary>The only instance of this command.</summary>
+    /// <summary>
+    /// The only instance of this command.
+    /// </summary>
     public static SampleCsPanelCommand Instance
     {
       get;
       private set;
     }
 
-    ///<returns>The command name as it appears on the Rhino command line.</returns>
+    /// <returns> 
+    /// The command name as it appears on the Rhino command line.
+    /// </returns>
     public override string EnglishName
     {
       get { return "SampleCsPanelCommand"; }

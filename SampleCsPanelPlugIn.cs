@@ -1,22 +1,22 @@
 ﻿namespace SampleCsPanel
 {
   ///<summary>
-  /// <para>Every RhinoCommon .rhp assembly must have one and only one PlugIn-derived
-  /// class. DO NOT create instances of this class yourself. It is the
-  /// responsibility of Rhino to create an instance of this class.</para>
-  /// <para>To complete plug-in information, please also see all PlugInDescription
-  /// attributes in AssemblyInfo.cs (you might need to click "Project" ->
-  /// "Show All Files" to see it in the "Solution Explorer" window).</para>
+  /// Every RhinoCommon plug-in must have one and only one Rhino.PlugIns.PlugIn
+  /// inherited class. DO NOT create instances of this class yourself. It is the
+  /// responsibility of Rhino to create an instance of this class.
   ///</summary>
   public class SampleCsPanelPlugIn : Rhino.PlugIns.PlugIn
   {
+    /// <summary>
+    /// Public constructor
+    /// </summary>
     public SampleCsPanelPlugIn()
     {
       Instance = this;
     }
 
     /// <summary>
-    /// Gets the only instance of the SampleCsPanelPlugIn plug-in.
+    /// The only instance of this plug-in.
     /// </summary>
     public static SampleCsPanelPlugIn Instance
     {
@@ -37,6 +37,15 @@
       Rhino.UI.Panels.RegisterPanel(this, panelType, "Sample", System.Drawing.SystemIcons.Question);
 
       return Rhino.PlugIns.LoadReturnCode.Success;
+    }
+
+    /// <summary>
+    /// The tabbed dockbar user control
+    /// </summary>
+    public SampleCsPanelUserControl UserControl
+    {
+      get;
+      set;
     }
   }
 }
