@@ -25,8 +25,15 @@ namespace SampleCsPanel
       // Set the user control property on our plug-in
       SampleCsPanelPlugIn.Instance.UserControl = this;
 
+      // Create a visible changed event handler
+      this.VisibleChanged += new EventHandler(SampleCsPanelUserControl_VisibleChanged);
+
       // Create a dispose event handler
       this.Disposed += new EventHandler(SampleCsPanelUserControl_Disposed);
+    }
+
+    void SampleCsPanelUserControl_VisibleChanged(object sender, EventArgs e)
+    {
     }
 
     /// <summary>
